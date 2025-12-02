@@ -1,26 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>App Redirect</title>
     <script>
-        // URLs
-        const iosUrl = "https://apps.apple.com/your-ios-app";
-        const androidUrl = "https://play.google.com/store/apps/details?id=your.android.app";
+        // Platform detection
+        const userAgent = navigator.userAgent  navigator.vendor  window.opera;
+        let redirectUrl = "";
 
-        // Detect device
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         if (/android/i.test(userAgent)) {
-            window.location.href = androidUrl;
+            // Android detected
+            redirectUrl = "https://play.google.com/store/apps/details?id=com.example.android";
         } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            window.location.href = iosUrl;
+            // iOS detected
+            redirectUrl = "https://apps.apple.com/app/id123456789";
         } else {
-            // Fallback page
-            window.location.href = "https://your-website.com";
+            // Default fallback page (web version)
+            redirectUrl = "https://example.com/web-version";
         }
+
+        // Redirect after short delay
+        setTimeout(() => {
+            window.location.href = redirectUrl;
+        }, 100); // 100ms delay
     </script>
 </head>
 <body>
-    <p>Redirecting to the app store...</p>
+    <p>Redirecting you to the app...</p>
 </body>
 </html>
