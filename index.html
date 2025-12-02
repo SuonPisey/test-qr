@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>App Redirect</title>
+    <script>
+        // URLs
+        const iosUrl = "https://apps.apple.com/your-ios-app";
+        const androidUrl = "https://play.google.com/store/apps/details?id=your.android.app";
+
+        // Detect device
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android/i.test(userAgent)) {
+            window.location.href = androidUrl;
+        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.href = iosUrl;
+        } else {
+            // Fallback page
+            window.location.href = "https://your-website.com";
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting to the app store...</p>
+</body>
+</html>
